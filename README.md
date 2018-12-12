@@ -43,3 +43,10 @@ cc.set("key","value")
 console.log(cc.get("key"))
 
 ```
+
+## how to use in cli
+```shell
+npm i -g cli.config
+```
+```shell
+```
