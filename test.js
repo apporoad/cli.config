@@ -1,6 +1,6 @@
-var cc1 = require('./index').system('abc').default({"abc":"LiSA"})
+var cc1 = require('./main').system('abc').default({"abc":"LiSA"})
 
-var cc2 = require('./index').system('bcd').default({'abc':"luna"})
+var cc2 = require('./main').system('bcd').default({'abc':"luna"})
 
 console.log(cc1.get())
 console.log(cc2.get())

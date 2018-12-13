@@ -1,4 +1,4 @@
-var config = require('./index').system("cconfigForCli").default({ "operateSystem" : "default"})
+var config = require('./main').system("cconfigForCli").default({ "operateSystem" : "default"})
 var commander = require('commander')
 
 exports.system = systemName =>{
