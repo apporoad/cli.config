@@ -136,7 +136,7 @@ function config(){
         return array
     }
 
-    this.runCli = cli.run
+    this.runCli = args => { cli.run(args, _this.systemName)}
 
 }
 
