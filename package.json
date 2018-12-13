@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/apporoad/cli.config/issues"
   },
-  "homepage": "https://github.com/apporoad/cli.config#readme"
+  "bin": {
+    "cconfig": "./bin.js",
+    "cc": "./bin.js"
+  },
+  "homepage": "https://github.com/apporoad/cli.config#readme",
+  "dependencies": {
+    "commander": "^2.19.0"
+  }
 }

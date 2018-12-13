@@ -29,3 +29,12 @@ console.log(cc1.get())
 //clear
 
 //cc1.clear()
+
+
+// ...
+ cc1.set(".node1.node2" ,"hello hello good day")
+
+ console.log(cc1.get())
+ console.log(cc1.get("..node1"))
+ console.log(cc1.get('..node1.node2'))
+ //console.log(cc1.get('.ac.ad'))

@@ -24,6 +24,8 @@ console.log(cc.get().example1)
 // LiSA
 console.log(cc.get().example2.name)
 // LiSA
+console.log(cc.get('example2.name'))
+// LiSA
 
 // here set config
 cc.set({
@@ -49,4 +51,7 @@ console.log(cc.get("key"))
 npm i -g cli.config
 ```
 ```shell
+cconfig -h
+cc -h
+
 ```

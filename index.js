@@ -4,10 +4,12 @@ var path = require('path')
 var fs = require('fs')
 
 
-var basePath = os.tmpdir()
-
 var getFilePath = systemName =>{
-    return path.join(os.tmpdir() , systemName + ".cli.cofnig")
+    var dir =  path.join(os.tmpdir() , "cli.cofnig")
+    if(!fs.existsSync(dir)){
+        fs.mkdirSync(dir)
+    }
+    return path.join(dir , systemName + ".cofnig")
 }
 
 function config(){
@@ -54,7 +56,20 @@ function config(){
      */
     this.get = key =>{
         if(key){
-            return _this.get()[key]
+            if(key.indexOf(".")> -1){
+                var result = _this.get()
+                key.split('.').forEach(element => {
+                    if(element){
+                        if(!result)
+                            throw Error("cli.config : get: cant get key : " + key + " from " + JSON.stringify(this.get()))
+                        result = result[element]
+                    }
+                })
+                return result
+            }
+            else{
+                return _this.get()[key]
+            }
         }else{
             return Object.assign({},_this._default,_this.getOsCofnig())
         }
@@ -67,11 +82,35 @@ function config(){
         if(util.Type.isObject(key)){
             var newConfig = Object.assign({},_this.getOsCofnig(),key)
             _this.systemConfig = newConfig
-            
         }
         else{
-            _this.systemConfig[key] = value
+            if(key.indexOf('.') > -1){
+                var config = _this.getOsCofnig()
+                var lastFatherNode = null
+                var lastKey = null
+                key.split('.').forEach(element=>{
+                    if(element){
+                        lastFatherNode = config
+                        lastKey = element
+                        if(config[element]){
+                            config = config[element]
+                        }else{
+                            config[element] ={}
+                            config = config[element]
+                        }
+                    }
+                })
+                if(lastFatherNode){
+                    lastFatherNode[lastKey] = value
+                }
+            }
+            else
+            {
+                //console.log(_this.systemConfig)
+                _this.getOsCofnig()[key] = value
+            }
         }
+        //console.log(getFilePath(_this.systemName))
         fs.writeFile(getFilePath(_this.systemName),JSON.stringify(_this.systemConfig),'utf-8',()=>{})
     }
 
@@ -81,6 +120,20 @@ function config(){
     this.clear = ()=>{
         fs.unlink(getFilePath(_this.systemName),()=>{})
         _this.systemConfig={}
+    }
+
+    /**
+     * ls all name
+     */
+    this.ls = ()=>{
+        var dir =  path.join(os.tmpdir() , "cli.cofnig")
+        var array = []
+        fs.readdirSync(dir).forEach(element=>{
+            if(element.indexOf('.config')){
+                array.push(path.parse(element).name)
+            }
+        })
+        return array
     }
 
 }
