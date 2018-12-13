@@ -2,7 +2,7 @@ var util = require('./util')
 var os = require('os')
 var path = require('path')
 var fs = require('fs')
-
+var cli = require('./cli')
 
 var getFilePath = systemName =>{
     var dir =  path.join(os.tmpdir() , "cli.cofnig")
@@ -135,6 +135,8 @@ function config(){
         })
         return array
     }
+
+    this.runCli = cli.run
 
 }
 
