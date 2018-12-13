@@ -15,8 +15,9 @@ exports.run =(args,systemName) =>{
             + 'set [key] [value]\r\n'
             + 'ls\r\n'
             + 'list\r\n'
-            + 'system [systemName]'
-            + 'system')
+            + 'system [systemName]\r\n'
+            + 'system\r\n'
+            + 'clear')
         .parse(args)
     //console.log(commander.args)
     if(commander.args.length == 0){
@@ -49,6 +50,10 @@ exports.run =(args,systemName) =>{
                 else{
                     console.log('current selected system : ' + config.get("operateSystem"))
                 }
+                break
+            case 'clear':
+                systemConfig.clear()
+                console.log('clear completed')
                 break
             default:
                 console.log('pliz try -h')
