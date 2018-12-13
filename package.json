@@ -1,5 +1,5 @@
 {
-  "name": "cli.config",
+  "name": "cli.config.js",
   "version": "1.0.0",
   "description": "cli config",
   "main": "index.js",

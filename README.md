@@ -4,10 +4,11 @@ config for cli
 
 ## how to use  in code
 ```shell
-npm i --save cli.config
+npm i --save cli.config.js
 ```
 recommand use
 ```js
+var cc = require('cli.config.js')
 var yourDefaultConfig = {
      example1 : "LiSA",
      example2 : {
@@ -48,7 +49,7 @@ console.log(cc.get("key"))
 
 ## how to use in cli
 ```shell
-npm i -g cli.config
+npm i -g cli.config.js
 ```
 ```shell
 cconfig -h
