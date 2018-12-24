@@ -2,7 +2,10 @@ var util = require('./util')
 var os = require('os')
 var path = require('path')
 var fs = require('fs')
+const objectAssignDeep = require('object-assign-deep')
 //var cli = require('./cli')
+
+
 
 var getFilePath = systemName =>{
     var dir =  path.join(os.tmpdir() , "cli.cofnig")
@@ -71,7 +74,7 @@ function config(){
                 return _this.get()[key]
             }
         }else{
-            return Object.assign({},_this._default,_this.getOsCofnig())
+            return objectAssignDeep({},_this._default,_this.getOsCofnig())
         }
     }
     
@@ -80,7 +83,7 @@ function config(){
      */
     this.set = (key,value) =>{
         if(util.Type.isObject(key)){
-            var newConfig = Object.assign({},_this.getOsCofnig(),key)
+            var newConfig = objectAssignDeep({},_this.getOsCofnig(),key)
             _this.systemConfig = newConfig
         }
         else{

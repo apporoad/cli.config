@@ -38,3 +38,14 @@ console.log(cc1.get())
  console.log(cc1.get("..node1"))
  console.log(cc1.get('..node1.node2'))
  //console.log(cc1.get('.ac.ad'))
+
+
+
+// test deep copy
+console.log('+++++++++++++++++++++++++++++++++++++++++')
+
+ var cc3 = require('./main').system('bcd').default({'hello':{ 'hello' : "good day" }})
+
+ cc3.set("hello",{ 'hi': 'nihao'})
+
+ console.log(cc3.get())
