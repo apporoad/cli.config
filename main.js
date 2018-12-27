@@ -22,7 +22,7 @@ function config(){
     this.systemName = "default"
     this._default = {}
     this.systemConfig =null
-    this.force = null;
+    this._force = null
     /**
      * change systemName
      */
@@ -38,7 +38,7 @@ function config(){
      */
     this.default = defaultJson =>{
         if(util.Type.isObject(defaultJson)){
-            this._default = defaultJson
+            _this._default = defaultJson
         }
         return _this
     }
@@ -47,7 +47,7 @@ function config(){
      *  set force 
      */
     this.force = forceJson =>{
-        _this.force = forceJson
+        _this._force = forceJson
         return _this
     }
 
@@ -86,7 +86,8 @@ function config(){
                 return _this.get()[key]
             }
         }else{
-            return objectAssignDeep({},_this._default,_this.getOsCofnig(), _this.force || {})
+            //console.log("XXXX : " +_this._force)
+            return objectAssignDeep({},_this._default,_this.getOsCofnig(), _this._force || {})
         }
     }
     
@@ -126,6 +127,8 @@ function config(){
             }
         }
         //console.log(getFilePath(_this.systemName))
+        //console.log(getFilePath(_this.systemName))
+        //console.log(JSON.stringify(_this.systemConfig))
         fs.writeFileSync(getFilePath(_this.systemName),JSON.stringify(_this.systemConfig),'utf-8')
     }
 

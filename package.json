@@ -1,6 +1,6 @@
 {
   "name": "cli.config.js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "cli config",
   "main": "index.js",
   "scripts": {
