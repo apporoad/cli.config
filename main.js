@@ -13,7 +13,7 @@ var getFilePath = systemName =>{
         fs.mkdirSync(dir)
     }
     var p = path.join(dir , systemName + ".config")
-    console.log(p)
+    //console.log(p)
     return p
 }
 
