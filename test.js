@@ -49,3 +49,11 @@ console.log('+++++++++++++++++++++++++++++++++++++++++')
  cc3.set("hello",{ 'hi': 'nihao'})
 
  console.log(cc3.get())
+
+
+
+ var cc4 =  require('./main').system('bcd').default({'hello':{ 'hello' : "good day" }}).force({'hello':{ 'hello' : "force" }})
+
+cc4.set("hello",{ 'hi': 'nihao'})
+
+console.log(cc4.get())

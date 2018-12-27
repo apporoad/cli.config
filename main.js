@@ -8,11 +8,13 @@ const objectAssignDeep = require('object-assign-deep')
 
 
 var getFilePath = systemName =>{
-    var dir =  path.join(os.tmpdir() , "cli.cofnig")
+    var dir =  path.join(os.tmpdir() , "cli.config")
     if(!fs.existsSync(dir)){
         fs.mkdirSync(dir)
     }
-    return path.join(dir , systemName + ".cofnig")
+    var p = path.join(dir , systemName + ".config")
+    console.log(p)
+    return p
 }
 
 function config(){
@@ -20,6 +22,7 @@ function config(){
     this.systemName = "default"
     this._default = {}
     this.systemConfig =null
+    this.force = null;
     /**
      * change systemName
      */
@@ -40,12 +43,21 @@ function config(){
         return _this
     }
 
+    /**
+     *  set force 
+     */
+    this.force = forceJson =>{
+        _this.force = forceJson
+        return _this
+    }
+
     this.getOsCofnig =()=>{
         if(_this.systemConfig){
             return _this.systemConfig
         }
         var p = getFilePath(_this.systemName)
         if(fs.existsSync(p)){
+            //console.log(p)
            _this.systemConfig = JSON.parse(fs.readFileSync(p,'utf-8'))
         }
         else{
@@ -74,7 +86,7 @@ function config(){
                 return _this.get()[key]
             }
         }else{
-            return objectAssignDeep({},_this._default,_this.getOsCofnig())
+            return objectAssignDeep({},_this._default,_this.getOsCofnig(), _this.force || {})
         }
     }
     
@@ -114,7 +126,7 @@ function config(){
             }
         }
         //console.log(getFilePath(_this.systemName))
-        fs.writeFile(getFilePath(_this.systemName),JSON.stringify(_this.systemConfig),'utf-8',()=>{})
+        fs.writeFileSync(getFilePath(_this.systemName),JSON.stringify(_this.systemConfig),'utf-8')
     }
 
     /**
