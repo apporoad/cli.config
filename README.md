@@ -16,7 +16,7 @@ var yourDefaultConfig = {
          remark: "hello good day"
      }
 }
-var cc = require('cli.config').system('yourProgramName')
+var cc = require('cli.config.js').system('yourProgramName')
     .default(yourDefaultConfig)
     .force(yourConfirmedConfig)
 
