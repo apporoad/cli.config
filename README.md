@@ -1,6 +1,8 @@
 # cli.config
 config for cli
 
+# tips
+* cli.config support hot load config per 5 min
 
 ## how to use  in code
 ```shell

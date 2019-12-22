@@ -4,7 +4,7 @@ var path = require('path')
 var fs = require('fs')
 const objectAssignDeep = require('object-assign-deep')
 //var cli = require('./cli')
-
+const defaultConfigKeepTime = 5* 60 * 1000
 
 
 var getFilePath = systemName =>{
@@ -30,6 +30,7 @@ function config(){
     this._default = {}
     this.systemConfig =null
     this._force = null
+    _this._lastLoadTime=null
     /**
      * change systemName
      */
@@ -59,9 +60,13 @@ function config(){
     }
 
     this.getOsCofnig =()=>{
+        if(_this._lastLoadTime && Date.now()-_this._lastLoadTime > defaultConfigKeepTime){
+            _this.systemConfig = null
+        }
         if(_this.systemConfig){
             return _this.systemConfig
         }
+        _this._lastLoadTime = Date.now()
         var p = getFilePath(_this.systemName)
         if(fs.existsSync(p)){
             //console.log(p)
