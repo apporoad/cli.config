@@ -9,6 +9,13 @@ const objectAssignDeep = require('object-assign-deep')
 
 var getFilePath = systemName =>{
     var dir =  path.join(os.tmpdir() , "cli.config")
+    if(process.env.CC_PATH){
+        dir = process.env.CC_PATH
+        if(!fs.existsSync(dir)){
+            console.log('you shall mkdir dir by yourself : '+ dir)
+            throw Error('Cli.config: dir not exists : ' + dir)
+        }
+    }
     if(!fs.existsSync(dir)){
         fs.mkdirSync(dir)
     }

@@ -58,3 +58,14 @@ cconfig -h
 cc -h
 
 ```
+
+## using in prod env
+
+pliz set env :
+```bash
+
+vim /etc/profile
+
+export CC_PATH="/cli.config/"
+
+```
